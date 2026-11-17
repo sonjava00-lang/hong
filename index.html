@@ -6,8 +6,11 @@
 <link rel="manifest" href="manifest.json">
 <title>홍</title>
 <style>html,body{margin:0;height:100%}iframe{border:0;width:100%;height:100%}</style>
+  <link rel="preconnect" href="https://script.google.com">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
 </head><body>
-<iframe id="f"></iframe>
+<div id="ld" style="position:fixed;inset:0;display:flex;align-items:center;justify-content:center;font-family:sans-serif;color:#64748b">불러오는 중…</div>
+<iframe id="f" style="visibility:hidden"></iframe>
 <script>
 var BASE = 'https://script.google.com/macros/s/AKfycbyaJ1Qp_dWC8nm7IdJk_4ETPWOy4zFc-bx5unwX3uctUhkw_10sCoL_O2COMDFEP0XQ/exec?mode=hong';
 if (location.hash === '#reset') {
@@ -19,6 +22,10 @@ if (!pin) {
   pin = prompt('비밀번호') || '';
   if (pin) { try { localStorage.setItem('hong_pin', pin); } catch (e) {} }
 }
+  document.getElementById('f').onload = function () {
+  this.style.visibility = 'visible';
+  document.getElementById('ld').style.display = 'none';
+};
 document.getElementById('f').src = BASE + (pin ? '&p=' + encodeURIComponent(pin) : '');
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
 </script>
