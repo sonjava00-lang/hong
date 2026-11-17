@@ -39,7 +39,9 @@ if (app === 'hong' && !q.has('mode')) q.set('mode', 'hong');
 var f = document.getElementById('f');
 f.onload = function () {
   f.style.visibility = 'visible';
-  document.getElementById('ld').style.display = 'none';
+  var ld = document.getElementById('ld');
+  ld.style.opacity = 0;
+  setTimeout(function () { ld.style.display = 'none'; }, 300);
 };
 var qs = q.toString();
 f.src = APPS[app] + (qs ? '?' + qs : '');
