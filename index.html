@@ -4,11 +4,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#ffffff">
 <link rel="manifest" href="manifest.json">
-<title>홍</title>
-<style>html,body{margin:0;height:100%}iframe{border:0;width:100%;height:100%}</style>
+<link rel="preconnect" href="https://script.google.com">
+<title>홍성운</title>
+<style>
+html,body{margin:0;height:100%}
+iframe{border:0;width:100%;height:100%}
+#ld{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;font-family:sans-serif;color:#64748b}
+</style>
 </head><body>
-<iframe src="https://script.google.com/macros/s/AKfycbwJbUV93q2afbVYgQHLgDiIB6Y9MDPKGI94M5GOIFMhR6GDW9zLDa1-nsIKKT7EWP24/exec?mode=hong"></iframe>
+<div id="ld">불러오는 중…</div>
+<iframe id="f" style="visibility:hidden"></iframe>
 <script>
+var BASE = 'https://script.google.com/macros/s/AKfycbwJbUV93q2afbVYgQHLgDiIB6Y9MDPKGI94M5GOIFMhR6GDW9zLDa1-nsIKKT7EWP24/exec';
+
+var q = new URLSearchParams(location.search);
+if (!q.has('mode')) q.set('mode', 'hong');   // 모드가 없으면 hong
+
+var f = document.getElementById('f');
+f.onload = function () {
+  f.style.visibility = 'visible';
+  document.getElementById('ld').style.display = 'none';
+};
+f.src = BASE + '?' + q.toString();
+
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
 </script>
 </body></html>
