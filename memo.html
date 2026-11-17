@@ -2,20 +2,35 @@
 <html lang="ko"><head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
 <link rel="manifest" href="manifest-memo.json">
-<title>전례비상연락망</title>
+<link rel="preconnect" href="https://script.google.com">
+<title>메모</title>
 <style>
-  html,body{margin:0;height:100%}
+html,body{margin:0;height:100%}
 iframe{border:0;width:100%;height:100%}
-#ld{position:fixed;inset:0;background:#716f7c url(splash.jpg) center/cover no-repeat;
+#ld{position:fixed;inset:0;z-index:10;
+    background:#0b1530 url(splash-memo.jpg) center/cover no-repeat;
     display:flex;align-items:flex-end;justify-content:center;
     padding-bottom:calc(40px + env(safe-area-inset-bottom));
     font-family:sans-serif;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.6);
     transition:opacity .3s}
 </style>
 </head><body>
-<iframe src="https://script.google.com/macros/s/AKfycbz3rCedZuvDnUErvwCXPTWrk1Q1AfeoHp9DQybtDyeBlailF422ubzlEhG9t_qqpH7E/exec"></iframe>
+<div id="ld">불러오는 중…</div>
+<iframe id="f" style="visibility:hidden" src="https://script.google.com/macros/s/AKfycbz3rCedZuvDnUErvwCXPTWrk1Q1AfeoHp9DQybtDyeBlailF422ubzlEhG9t_qqpH7E/exec"></iframe>
 <script>
+var f = document.getElementById('f');
+var start = Date.now();
+f.onload = function () {
+  var wait = Math.max(0, 1200 - (Date.now() - start));   // 사진을 최소 1.2초는 보여줌
+  setTimeout(function () {
+    f.style.visibility = 'visible';
+    var ld = document.getElementById('ld');
+    ld.style.opacity = 0;
+    setTimeout(function () { ld.style.display = 'none'; }, 300);
+  }, wait);
+};
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js');
 </script>
 </body></html>
